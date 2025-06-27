@@ -7,22 +7,23 @@ on:
     branches: [main]
 
 jobs:
-  analyze:
+  analyze-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.0'  # Ajusta según tu versión real
+          flutter-version: '3.19.0' # Asegúrate de usar la misma versión que usas localmente
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Analyze
+      - name: Static Code Analysis
         run: flutter analyze
 
-      - name: Run tests
+      - name: Run Unit Tests
         run: flutter test
