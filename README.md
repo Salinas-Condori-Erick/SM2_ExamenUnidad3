@@ -41,15 +41,22 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Static Code Analysis (no falla si hay warnings)
+      - name: Static Code Analysis 
         run: flutter analyze || true
 
       - name: Run Unit Tests
         run: flutter test
 
+```
+
+![image](https://github.com/user-attachments/assets/06f68804-eeb0-4f3e-a67a-83c7eb3824f7)
+
+
 ### 3. Ejecución del workflow en la pestaña Actions.
 
+![image](https://github.com/user-attachments/assets/78f24f8b-0891-4751-ab34-35891aa5b7f2)
 
+![image](https://github.com/user-attachments/assets/93c87e6b-5ba5-4ae5-9917-6eb190068be6)
 
 
 
