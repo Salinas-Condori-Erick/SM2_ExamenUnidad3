@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Static Code Analysis (no falla si hay warnings)
+      - name: Static Code Analysis 
         run: flutter analyze || true
 
       - name: Run Unit Tests
