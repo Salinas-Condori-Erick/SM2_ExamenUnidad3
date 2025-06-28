@@ -14,14 +14,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Flutter (v3.22.0 desde canal beta)
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.22.0'
-          channel: 'beta'
+      - name: Install Flutter manually (v3.22.1)
+        run: |
+          git clone https://github.com/flutter/flutter.git -b stable
+          echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
+          export PATH="$PATH:$GITHUB_WORKSPACE/flutter/bin"
+          flutter --version
 
-      - name: Display Flutter version (opcional para debug)
-        run: flutter --version
+      - name: Enable Flutter version 3.22.1 (if needed)
+        run: |
+          flutter channel stable
+          flutter upgrade
+          flutter --version
 
       - name: Install dependencies
         run: flutter pub get
