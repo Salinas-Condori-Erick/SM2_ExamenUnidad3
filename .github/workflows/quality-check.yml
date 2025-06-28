@@ -7,31 +7,27 @@ on:
     branches: [main]
 
 jobs:
-  analyze-and-test:
+  quality-check:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install Flutter manually (v3.22.1)
+      - name: Set up Flutter manually (v3.22.1)
         run: |
           git clone https://github.com/flutter/flutter.git -b stable
           echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
           export PATH="$PATH:$GITHUB_WORKSPACE/flutter/bin"
           flutter --version
+          flutter doctor
 
-      - name: Enable Flutter version 3.22.1 (if needed)
-        run: |
-          flutter channel stable
-          flutter upgrade
-          flutter --version
-
-      - name: Install dependencies
+      - name: Get dependencies
         run: flutter pub get
 
-      - name: Static Code Analysis
+      - name: Run static analysis
         run: flutter analyze
 
-      - name: Run Unit Tests
+      - name: Run unit tests
         run: flutter test
+
